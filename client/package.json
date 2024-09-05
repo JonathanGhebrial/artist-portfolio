@@ -1,0 +1,41 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-router-dom": "^6.26.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.0",
+        "@babel/plugin-transform-private-property-in-object": "^7.24.7",
+        "@babel/preset-env": "^7.21.0",
+        "@babel/preset-react": "^7.21.0",
+        "babel-loader": "^8.2.3",
+        "css-loader": "^6.7.1",
+        "file-loader": "^6.2.0",
+        "html-webpack-plugin": "^5.6.0",
+        "style-loader": "^3.3.1",
+        "webpack": "^5.72.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.7.3"
+    },
+    "scripts": {
+        "start": "webpack serve --config webpack.config.js",
+        "build": "webpack --config webpack.config.js",
+        "test": "echo \"No test specified\" && exit 1"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "artist-portfolio",
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "start": "concurrently \"npm run server\" \"npm run client\"",
+        "server": "nodemon server/server.js",
+        "client": "npm start --prefix client",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "build": "npm run build --prefix client"
+    },
+    "dependencies": {
+        "express": "^4.19.2"
+    },
+    "devDependencies": {
+        "concurrently": "^7.6.0",
+        "nodemon": "^3.1.4"
+    }
+}
