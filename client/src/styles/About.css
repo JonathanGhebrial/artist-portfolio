@@ -23,3 +23,16 @@
 .about-container a:hover {
   text-decoration: underline;
 }
+
+.about-container img {
+  width: 300px;
+  height: auto;
+  border-radius: 0; /* No rounded corners */
+  margin-bottom: 20px; /* Add some space below the image */
+}
+
+.about-container .bio-text {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+}
