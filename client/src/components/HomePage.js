@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ContactForm from './ContactForm';  // Import the ContactForm component
 
 const HomePage = () => {
     const [photos, setPhotos] = useState([]);
@@ -29,6 +30,9 @@ const HomePage = () => {
             ) : (
                 <p>No photos uploaded yet.</p>
             )}
+            
+            {/* Adding the ContactForm below the photos */}
+            <ContactForm />
         </div>
     );
 };

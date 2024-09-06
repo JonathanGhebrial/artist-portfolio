@@ -1,38 +1,65 @@
 .about-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* Align items to the start to keep the text block aligned */
   padding: 40px;
-  text-align: center;
   font-family: 'Archivo', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.about-container h1 {
+.about-container img {
+  width: 40%;
+  max-width: 400px; /* Adjust this for the image size */
+  height: auto;
+  border-radius: 10px;
+}
+
+.about-content {
+  width: 55%; /* This allows for a 5% space between the image and text */
+  text-align: center; /* Center-aligns the text within the text block */
+}
+
+.about-content h1 {
   font-size: 36px;
   color: #333;
   margin-bottom: 20px;
+  text-align: center; /* Ensure the title is centered */
 }
 
-.about-container p {
+.about-content p {
   font-size: 18px;
   color: #555;
+  margin-bottom: 20px;
+  text-align: left; /* Left-aligns the paragraph text */
 }
 
-.about-container a {
+.about-content a {
   color: #333;
   text-decoration: none;
 }
 
-.about-container a:hover {
+.about-content a:hover {
   text-decoration: underline;
 }
 
-.about-container img {
-  width: 300px;
-  height: auto;
-  border-radius: 0; /* No rounded corners */
-  margin-bottom: 20px; /* Add some space below the image */
+.contact-form-container {
+  margin-top: 20px; /* Adds space between the content and the form */
 }
 
-.about-container .bio-text {
-  margin-top: 20px;
-  font-size: 18px;
-  color: #333;
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-container img {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .about-content {
+    width: 100%;
+    text-align: center;
+  }
 }
