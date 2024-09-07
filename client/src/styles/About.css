@@ -1,65 +1,85 @@
+.about-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure full viewport height */
+  justify-content: space-between;
+}
+
 .about-container {
   display: flex;
+  flex: 1;
   justify-content: space-between;
-  align-items: flex-start; /* Align items to the start to keep the text block aligned */
-  padding: 40px;
+  align-items: center; /* Center content vertically */
+  padding: 10px; /* Reduced padding */
   font-family: 'Archivo', sans-serif;
   max-width: 1200px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
-.about-container img {
-  width: 40%;
-  max-width: 400px; /* Adjust this for the image size */
+.portrait {
+  max-width: 35%; /* Adjusted to make the image slightly smaller */
   height: auto;
   border-radius: 10px;
 }
 
 .about-content {
-  width: 55%; /* This allows for a 5% space between the image and text */
-  text-align: center; /* Center-aligns the text within the text block */
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .about-content h1 {
-  font-size: 36px;
+  font-size: 22px; /* Slightly reduced font size */
   color: #333;
-  margin-bottom: 20px;
-  text-align: center; /* Ensure the title is centered */
+  margin-bottom: 12px; /* Reduced margin */
+  align-self: center; /* Center the title */
 }
 
 .about-content p {
-  font-size: 18px;
+  font-size: 14px; /* Slightly reduced font size */
   color: #555;
-  margin-bottom: 20px;
-  text-align: left; /* Left-aligns the paragraph text */
-}
-
-.about-content a {
-  color: #333;
-  text-decoration: none;
-}
-
-.about-content a:hover {
-  text-decoration: underline;
+  margin-bottom: 12px; /* Reduced margin */
+  line-height: 1.4;
+  max-width: 750px; /* Match the max width of the contact form */
+  text-align: center; /* Center text for better aesthetics */
 }
 
 .contact-form-container {
-  margin-top: 20px; /* Adds space between the content and the form */
+  margin-top: 12px; /* Reduced margin */
+  width: 100%;
+}
+
+.contact-form-container input,
+.contact-form-container textarea {
+  padding: 8px; /* Reduced padding */
+  font-size: 14px;
+}
+
+.contact-form-container .submit-button {
+  padding: 8px 16px; /* Reduced padding */
+  font-size: 14px;
 }
 
 @media (max-width: 768px) {
   .about-container {
     flex-direction: column;
     align-items: center;
+    text-align: center;
   }
 
-  .about-container img {
-    width: 80%;
+  .portrait {
+    max-width: 80%;
     margin-bottom: 20px;
   }
 
   .about-content {
-    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-content p {
     text-align: center;
   }
 }

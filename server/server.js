@@ -12,9 +12,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Custom middleware to log requests
+// Middleware to log every request
 app.use((req, res, next) => {
-    console.log(`Incoming request: ${req.method} ${req.url}`);
+    console.log(`Request received: ${req.method} ${req.url}`);
     next();
 });
 
@@ -38,10 +38,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Endpoint to handle file uploads at the /jessy route
 app.post('/jessy', upload.single('file'), (req, res) => {
-    console.log('File upload request received');
     const { page } = req.body; // Get the page to display the photo on
     if (!page) {
-        console.error('No page specified in file upload');
         return res.status(400).send({ error: 'No page specified' });
     }
     const photoPath = req.file.filename;
@@ -52,19 +50,13 @@ app.post('/jessy', upload.single('file'), (req, res) => {
 
 // Endpoint to retrieve photos based on the page
 app.get('/photos/:page', (req, res) => {
-    console.log(`Fetching photos for page: ${req.params.page}`);
     const page = req.params.page;
-    try {
-        const photos = fs.readFileSync('photos.json', 'utf8')
-            .split('\n')
-            .filter(Boolean)
-            .map(line => JSON.parse(line))
-            .filter(photo => photo.page === page);
-        res.json(photos.map(photo => photo.path));
-    } catch (err) {
-        console.error('Error fetching photos:', err);
-        res.status(500).send({ error: 'Failed to fetch photos' });
-    }
+    const photos = fs.readFileSync('photos.json', 'utf8')
+        .split('\n')
+        .filter(Boolean)
+        .map(line => JSON.parse(line))
+        .filter(photo => photo.page === page);
+    res.json(photos.map(photo => photo.path));
 });
 
 // Configure Nodemailer
@@ -78,7 +70,6 @@ const transporter = nodemailer.createTransport({
 
 // Endpoint to handle contact form submissions
 app.post('/send-email', (req, res) => {
-    console.log('Contact form submission received');
     const { firstName, lastName, email, subject, message } = req.body;
 
     const mailOptions = {
@@ -103,7 +94,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/dist/index.html'), (err) => {
         if (err) {
             console.error('Error serving index.html:', err);
-            res.status(500).send({ error: 'Failed to load the requested page' });
+            res.status(500).send('An error occurred while serving the requested page.');
         }
     });
 });
