@@ -10,49 +10,49 @@
     background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
     box-sizing: border-box;
-    overflow-x: hidden;
 }
 
 .logo-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    max-width: 12rem; /* Increased the max-width to make the logo larger */
     flex-shrink: 0;
 }
 
 .navbar-logo-img {
-    height: 3rem; /* Increased logo size */
+    height: 5rem; /* Increased the size of the logo */
     margin-right: 10px;
 }
 
 .nav-links {
     list-style: none;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
     margin: 0;
     padding: 0;
 }
 
 .nav-link {
     text-decoration: none;
-    color: #888; /* Gray text */
-    font-size: 1.4rem;
+    color: #000; /* Make the tabs black */
+    font-size: 1.6rem;
     font-weight: bold;
-    margin: 0 15px; /* Reduced margin */
-    opacity: 0.7;
-    transition: opacity 0.3s ease, color 0.3s ease;
-    white-space: nowrap;
+    margin: 0 20px; /* Ensure even spacing between the links */
+    padding-bottom: 5px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    opacity: 1;
-    color: #000; /* Black text on hover and active */
+    color: #000;
+    border-bottom: 2px solid #000; /* Add underline when active or hovered */
 }
 
 .social-icons {
     display: flex;
-    align-items: center;
+    justify-content: flex-end;
     flex-shrink: 0;
     margin-left: 20px;
 }
@@ -60,7 +60,7 @@
 .social-icon {
     width: 2.4rem;
     height: 2.4rem;
-    margin-left: 1rem; /* Adjusted to ensure equal spacing */
+    margin-left: 1.5rem;
     transition: transform 0.3s ease;
 }
 
@@ -68,37 +68,69 @@
     transform: scale(1.1);
 }
 
+/* Responsive Design */
+@media (max-width: 1400px) {
+    .navbar {
+        padding: 8px 16px;
+    }
+
+    .nav-link {
+        font-size: 1.4rem;
+        margin: 0 15px;
+    }
+
+    .social-icon {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+}
+
 @media (max-width: 1000px) {
+    .navbar {
+        height: 3.5rem;
+        padding: 6px 12px;
+    }
+
+    .logo-container {
+        width: 10rem;
+    }
+
     .navbar-logo-img {
-        height: 2.6rem;
+        height: 2.8rem;
     }
 
     .nav-link {
         font-size: 1.2rem;
-        margin: 0 10px; /* Adjust margin for responsiveness */
+        margin: 0 10px;
+    }
+
+    .social-icons {
+        margin-left: 10px;
     }
 
     .social-icon {
         width: 2rem;
         height: 2rem;
-        margin-left: 0.8rem;
+        margin-left: 1rem;
     }
 }
 
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
+        height: auto;
         padding: 8px 10px;
     }
 
     .nav-links {
         justify-content: center;
         margin: 10px 0;
+        width: auto;
     }
 
     .nav-link {
         font-size: 1.2rem;
-        margin: 0 5px;
+        margin: 0 5px; /* Adjust margin for mobile */
     }
 
     .social-icons {

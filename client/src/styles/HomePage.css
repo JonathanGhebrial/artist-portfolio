@@ -1,26 +1,27 @@
 .homepage-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Center the content horizontally */
+    min-height: 100vh;
     width: 100%;
-    padding: 0 10px; /* Adjust padding for spacing on each side */
     box-sizing: border-box;
+    padding: 0 20px;
 }
 
 .video-section {
+    flex-grow: 1;
     width: 100%;
-    max-width: 100%; /* Ensure the video section takes the full width */
-    margin: 0; /* Remove any top margin */
-    padding: 0; /* Remove any padding */
+    display: flex;
+    justify-content: center; /* Center the video horizontally */
+    align-items: center; /* Center the video vertically */
+    max-width: 1200px;
 }
 
 .video-container {
     position: relative;
-    width: 100%;
-    max-width: 95%; /* Allow a small margin on the sides */
-    margin: 0 auto; /* Center the video horizontally */
-    padding-top: 42.25%; /* Adjusted aspect ratio for shorter and wider video */
-    overflow: hidden;
+    width: 90%; /* Adjusted width to ensure it doesn't exceed container */
+    max-width: 1200px; /* Ensure the video doesn't get too wide */
+    padding-top: 56.25%; /* Maintain 16:9 aspect ratio */
 }
 
 .video {
@@ -34,6 +35,7 @@
 
 @media (max-width: 768px) {
     .video-container {
-        max-width: 100%; /* Ensure the video is responsive on smaller screens */
+        width: 100%; /* Make the video full-width on smaller screens */
+        padding-top: 56.25%; /* Maintain aspect ratio */
     }
 }
