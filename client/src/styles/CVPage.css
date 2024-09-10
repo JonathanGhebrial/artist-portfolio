@@ -1,0 +1,11 @@
+.cv-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.pdf-viewer {
+    width: 100%;
+    height: 90vh; /* Adjust the height as needed */
+}

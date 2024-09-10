@@ -21,11 +21,14 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(png|jpg|gif|svg)$/,
+        test: /\.(png|jpg|gif|svg|mp4|pdf)$/,  // Add pdf here
         use: [
           {
             loader: 'file-loader',
-            options: {},
+            options: {
+              name: '[name].[hash].[ext]', // This is optional, but can help with cache busting
+              outputPath: 'assets/',  // Specify the output directory for media files
+            },
           },
         ],
       },

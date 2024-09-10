@@ -31,10 +31,10 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/dist')));
+app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Serve the uploaded files statically
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Endpoint to handle file uploads at the /jessy route
 app.post('/jessy', upload.single('file'), (req, res) => {
@@ -46,6 +46,35 @@ app.post('/jessy', upload.single('file'), (req, res) => {
     const photoData = { path: photoPath, page };
     fs.appendFileSync('photos.json', JSON.stringify(photoData) + '\n');
     res.send({ message: 'File uploaded successfully', photo: photoData });
+});
+
+// Endpoint to delete photos based on the filename
+app.delete('/jessy', (req, res) => {
+    const { filename } = req.body; // Get the filename of the photo to delete
+    if (!filename) {
+        return res.status(400).send({ error: 'No filename specified' });
+    }
+
+    const filePath = path.join(__dirname, '../uploads', filename);
+
+    // Check if the file exists
+    if (!fs.existsSync(filePath)) {
+        return res.status(404).send({ error: 'File not found' });
+    }
+
+    // Delete the file
+    fs.unlinkSync(filePath);
+
+    // Update the photos.json file
+    const photos = fs.readFileSync('photos.json', 'utf8')
+        .split('\n')
+        .filter(Boolean)
+        .map(line => JSON.parse(line))
+        .filter(photo => photo.path !== filename);
+
+    fs.writeFileSync('photos.json', photos.map(photo => JSON.stringify(photo)).join('\n'));
+
+    res.send({ message: 'File deleted successfully' });
 });
 
 // Endpoint to retrieve photos based on the page
@@ -90,8 +119,10 @@ app.post('/send-email', (req, res) => {
 
 // Handles any requests that don't match the API routes
 app.get('*', (req, res) => {
-    console.log(`Serving index.html for route: ${req.url}`);
-    res.sendFile(path.join(__dirname, 'client/dist/index.html'), (err) => {
+    const filePath = path.join(__dirname, '../client/dist/index.html');
+    console.log(`Serving file from: ${filePath}`);
+    
+    res.sendFile(filePath, (err) => {
         if (err) {
             console.error('Error serving index.html:', err);
             res.status(500).send('An error occurred while serving the requested page.');

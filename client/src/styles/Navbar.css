@@ -1,89 +1,68 @@
 .navbar {
+    width: 100%;
+    height: 4.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 40px;
-    background-color: transparent;
+    padding: 10px 20px;
+    background-color: #fff;
     border-bottom: 1px solid #e0e0e0;
+    box-sizing: border-box;
+    overflow-x: hidden;
 }
 
-.navbar-logo {
+.logo-container {
     display: flex;
-    flex-direction: column;
-    font-family: 'Archivo', sans-serif;
-    text-decoration: none; /* Ensure no underline */
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 10rem;
+    flex-shrink: 0;
 }
 
-.navbar-title {
-    font-size: 24px; /* Adjust size as needed */
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0;
-    color: #333;
-    text-decoration: none; /* Remove underline */
+.navbar-logo-img {
+    height: 3rem; /* Make the logo slightly bigger */
+    margin-right: 10px;
 }
 
-.navbar-subtitle {
-    font-size: 14px; /* Adjust size as needed */
-    font-weight: 400;
-    text-transform: uppercase;
-    margin: 0;
-    color: #666;
-    text-decoration: none; /* Remove underline */
-}
-
-.nav-tabs {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.nav-links {
+    list-style: none;
     display: flex;
-    gap: 40px;
-    font-family: 'Archivo', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #333;
+    justify-content: space-between;
+    flex-grow: 1;
+    margin: 0 20px;
 }
 
-.nav-tabs li a {
-    color: #333; 
-    text-decoration: none; /* Remove underline from links */
-    transition: color 0.3s ease;
+.nav-link {
+    text-decoration: none;
+    color: gray; /* Default color for the text */
+    font-size: 1.6rem;
+    font-weight: bold;
+    opacity: 70%;
+    transition: opacity 0.3s ease, color 0.3s ease;
+    margin: 0 10px;
+    white-space: nowrap;
 }
 
-.nav-tabs li a:hover,
-.nav-tabs li a:focus {
-    color: #999; 
+.active-link {
+    color: black; /* Highlighted color when the tab is active */
+    opacity: 100%;
 }
 
 .social-icons {
     display: flex;
-    gap: 20px;
+    justify-content: flex-end;
+    flex-shrink: 0;
+    margin-left: 20px;
 }
 
 .social-icon {
-    width: 28px;
-    height: 28px;
-    filter: invert(0); 
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-left: 1.5rem;
+    transition: transform 0.3s ease;
+    object-fit: contain; /* Ensures that both icons are uniformly sized */
 }
 
-/* Responsive Design for Mobile */
-@media (max-width: 768px) {
-    .navbar-title {
-        font-size: 18px;
-    }
-
-    .navbar-subtitle {
-        font-size: 12px;
-    }
-
-    .nav-tabs {
-        font-size: 12px;
-        gap: 20px;
-    }
-
-    .social-icon {
-        width: 24px;
-        height: 24px;
-    }
+.social-icon:hover {
+    transform: scale(1.1);
 }
