@@ -14,33 +14,9 @@ const Navbar = () => {
         </NavLink>
       </div>
       <ul className="nav-links">
-        <li>
-          <NavLink
-            to="/previous-work"
-            className="nav-link"
-            activeClassName="active-link"
-          >
-            Previous Work
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/cv"
-            className="nav-link"
-            activeClassName="active-link"
-          >
-            CV
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/about"
-            className="nav-link"
-            activeClassName="active-link"
-          >
-            About & Contact
-          </NavLink>
-        </li>
+        <li><NavLink to="/previous-work" className="nav-link" activeClassName="active">Previous Work</NavLink></li>
+        <li><NavLink to="/cv" className="nav-link" activeClassName="active">CV</NavLink></li>
+        <li><NavLink to="/about" className="nav-link" activeClassName="active">About & Contact</NavLink></li>
       </ul>
       <div className="social-icons">
         <a href="https://www.instagram.com/jessy_sherif" target="_blank" rel="noopener noreferrer">
