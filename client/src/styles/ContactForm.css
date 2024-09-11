@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 720px; /* Slightly reduced max width */
+    max-width: 45rem; /* Converted 720px to 45rem */
     margin: 0 auto;
-    padding: 10px; /* Further reduced padding */
+    padding: 0.625rem; /* Converted 10px to 0.625rem */
     box-sizing: border-box;
 }
 
 .form-group {
     width: 100%;
-    margin-bottom: 8px; /* Further reduced margin */
+    margin-bottom: 0.5rem; /* Converted 8px to 0.5rem */
 }
 
 .name-group {
@@ -21,22 +21,22 @@
 
 .name-group div {
     width: 100%; /* Full width for mobile view */
-    margin-bottom: 8px; /* Further reduced margin */
+    margin-bottom: 0.5rem; /* Converted 8px to 0.5rem */
 }
 
 label {
     display: block;
-    margin-bottom: 4px; /* Further reduced margin */
-    font-size: 11px; /* Slightly smaller font size */
+    margin-bottom: 0.25rem; /* Converted 4px to 0.25rem */
+    font-size: 0.6875rem; /* Converted 11px to 0.6875rem */
     color: #333;
 }
 
 input, textarea {
     width: 100%;
-    padding: 6px; /* Further reduced padding */
+    padding: 0.375rem; /* Converted 6px to 0.375rem */
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 13px; /* Slightly smaller font size */
+    border-radius: 0.3125rem; /* Converted 5px to 0.3125rem */
+    font-size: 0.8125rem; /* Converted 13px to 0.8125rem */
     box-sizing: border-box;
 }
 
@@ -48,12 +48,12 @@ textarea {
     background-color: #A0522D;
     color: white;
     border: none;
-    padding: 7px 14px; /* Further reduced padding */
-    border-radius: 5px;
-    font-size: 13px; /* Slightly smaller font size */
+    padding: 0.4375rem 0.875rem; /* Converted 7px 14px to 0.4375rem 0.875rem */
+    border-radius: 0.3125rem; /* Converted 5px to 0.3125rem */
+    font-size: 0.8125rem; /* Converted 13px to 0.8125rem */
     cursor: pointer;
     align-self: center;
-    margin-top: 8px; /* Reduced margin-top */
+    margin-top: 0.5rem; /* Converted 8px to 0.5rem */
 }
 
 .submit-button:hover {
@@ -61,7 +61,7 @@ textarea {
 }
 
 /* Media query for tablets and desktop */
-@media (min-width: 768px) {
+@media (min-width: 48rem) { /* Converted 768px to 48rem */
     .name-group {
         flex-direction: row; /* Switch to row layout for larger screens */
     }

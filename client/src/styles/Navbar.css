@@ -6,9 +6,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem; /* Converted 10px 20px to 0.625rem 1.25rem */
     background-color: #fff;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 0.063rem solid #e0e0e0; /* Converted 1px to 0.063rem */
     box-sizing: border-box;
 }
 
@@ -22,7 +22,7 @@
 
 .navbar-logo-img {
     height: 5rem; /* Increased the size of the logo */
-    margin-right: 10px;
+    margin-right: 0.625rem; /* Converted 10px to 0.625rem */
 }
 
 .nav-links {
@@ -39,28 +39,28 @@
     color: #000; /* Make the tabs black */
     font-size: 1.6rem;
     font-weight: bold;
-    margin: 0 20px; /* Ensure even spacing between the links */
-    padding-bottom: 5px;
+    margin: 0 1.25rem; /* Converted 20px to 1.25rem */
+    padding-bottom: 0.313rem; /* Converted 5px to 0.313rem */
     transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 .nav-link:hover,
 .nav-link.active {
     color: #000;
-    border-bottom: 2px solid #000; /* Add underline when active or hovered */
+    border-bottom: 0.125rem solid #000; /* Converted 2px to 0.125rem */
 }
 
 .social-icons {
     display: flex;
     justify-content: flex-end;
     flex-shrink: 0;
-    margin-left: 20px;
+    margin-left: 1.25rem; /* Converted 20px to 1.25rem */
 }
 
 .social-icon {
     width: 2.4rem;
     height: 2.4rem;
-    margin-left: 1.5rem;
+    margin-left: 0.938rem; /* Converted 15px to 0.938rem */
     transition: transform 0.3s ease;
 }
 
@@ -71,12 +71,12 @@
 /* Responsive Design */
 @media (max-width: 1400px) {
     .navbar {
-        padding: 8px 16px;
+        padding: 0.5rem 1rem; /* Converted 8px 16px to 0.5rem 1rem */
     }
 
     .nav-link {
         font-size: 1.4rem;
-        margin: 0 15px;
+        margin: 0 0.938rem; /* Converted 15px to 0.938rem */
     }
 
     .social-icon {
@@ -88,7 +88,7 @@
 @media (max-width: 1000px) {
     .navbar {
         height: 3.5rem;
-        padding: 6px 12px;
+        padding: 0.375rem 0.75rem; /* Converted 6px 12px to 0.375rem 0.75rem */
     }
 
     .logo-container {
@@ -101,17 +101,17 @@
 
     .nav-link {
         font-size: 1.2rem;
-        margin: 0 10px;
+        margin: 0 0.625rem; /* Converted 10px to 0.625rem */
     }
 
     .social-icons {
-        margin-left: 10px;
+        margin-left: 0.625rem; /* Converted 10px to 0.625rem */
     }
 
     .social-icon {
         width: 2rem;
         height: 2rem;
-        margin-left: 1rem;
+        margin-left: 0.625rem; /* Converted 10px to 0.625rem */
     }
 }
 
@@ -119,21 +119,21 @@
     .navbar {
         flex-direction: column;
         height: auto;
-        padding: 8px 10px;
+        padding: 0.5rem 0.625rem; /* Converted 8px 10px to 0.5rem 0.625rem */
     }
 
     .nav-links {
         justify-content: center;
-        margin: 10px 0;
+        margin: 0.625rem 0; /* Converted 10px to 0.625rem */
         width: auto;
     }
 
     .nav-link {
         font-size: 1.2rem;
-        margin: 0 5px; /* Adjust margin for mobile */
+        margin: 0 0.313rem; /* Converted 5px to 0.313rem */
     }
 
     .social-icons {
-        margin-top: 10px;
+        margin-top: 0.625rem; /* Converted 10px to 0.625rem */
     }
 }

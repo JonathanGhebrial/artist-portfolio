@@ -17,6 +17,12 @@ const HomePage = () => {
           ></iframe>
         </div>
       </div>
+      <div className="content-section">
+        <h1 className="homepage-title">Welcome to Jessy Sherif's Portfolio</h1>
+        <p className="homepage-description">
+          Explore the work of a passionate cinematographer who captures compelling imagery and brings every vision to life with professionalism and creativity.
+        </p>
+      </div>
       <Footer />
     </div>
   );

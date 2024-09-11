@@ -1,15 +1,12 @@
-/* Footer.css */
-
 .footer {
+    width: 100%;
     background-color: #f8f8f8;
-    padding: 20px;
+    padding: 1.25rem; /* Converted 20px to 1.25rem */
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
     text-align: center;
-    width: 100%; /* Ensure the footer takes up full width */
-    margin-top: auto; /* Push the footer to the bottom when content is smaller */
+    box-sizing: border-box;
 }
 
 .footer-content {
@@ -17,7 +14,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 75rem; /* Converted 1200px to 75rem */
+    margin: 0 auto;
 }
 
 .footer-info {
@@ -29,9 +27,9 @@
 }
 
 .footer-info p {
-    margin: 5px 0;
+    margin: 0.3125rem 0; /* Converted 5px to 0.3125rem */
     color: #333;
-    font-size: 14px;
+    font-size: 0.875rem; /* Converted 14px to 0.875rem */
 }
 
 .footer-logo {
@@ -41,7 +39,7 @@
 }
 
 .footer-logo img {
-    width: 150px;
+    width: 12.5rem; /* Converted 200px to 12.5rem */
     height: auto;
 }
 
@@ -49,12 +47,12 @@
     flex: 1;
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
+    gap: 1.25rem; /* Converted 20px to 1.25rem */
 }
 
 .footer-socials img {
-    width: 30px;
-    height: 30px;
+    width: 1.875rem; /* Converted 30px to 1.875rem */
+    height: 1.875rem; /* Converted 30px to 1.875rem */
     transition: transform 0.3s ease;
 }
 
@@ -65,23 +63,23 @@
 /* Mobile Adjustments */
 @media (max-width: 768px) {
     .footer-content {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  
+
     .footer-info,
     .footer-logo,
     .footer-socials {
-      flex: unset;
-      margin-bottom: 10px;
+        flex: unset;
+        margin-bottom: 0.625rem; /* Converted 10px to 0.625rem */
     }
-  
+
     .footer-logo img {
-      width: 120px;
+        width: 9.375rem; /* Converted 150px to 9.375rem */
     }
-  
+
     .footer-socials img {
-      width: 25px;
-      height: 25px;
+        width: 1.5625rem; /* Converted 25px to 1.5625rem */
+        height: 1.5625rem; /* Converted 25px to 1.5625rem */
     }
 }

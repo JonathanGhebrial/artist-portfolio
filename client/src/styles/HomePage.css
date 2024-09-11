@@ -1,27 +1,24 @@
 .homepage-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content horizontally */
-    min-height: 100vh;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
+    padding: 0 1.25rem; /* Converted 20px to 1.25rem */
     box-sizing: border-box;
-    padding: 0 20px;
 }
 
 .video-section {
-    flex-grow: 1;
     width: 100%;
-    display: flex;
-    justify-content: center; /* Center the video horizontally */
-    align-items: center; /* Center the video vertically */
-    max-width: 1200px;
+    max-width: 75rem; /* Converted 1200px to 75rem */
+    margin-top: 1.25rem; /* Converted 20px to 1.25rem */
 }
 
 .video-container {
     position: relative;
-    width: 90%; /* Adjusted width to ensure it doesn't exceed container */
-    max-width: 1200px; /* Ensure the video doesn't get too wide */
-    padding-top: 56.25%; /* Maintain 16:9 aspect ratio */
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
 }
 
 .video {
@@ -33,9 +30,21 @@
     border: none;
 }
 
-@media (max-width: 768px) {
-    .video-container {
-        width: 100%; /* Make the video full-width on smaller screens */
-        padding-top: 56.25%; /* Maintain aspect ratio */
-    }
+.content-section {
+    width: 100%;
+    max-width: 75rem; /* Converted 1200px to 75rem */
+    margin-top: 1.25rem; /* Converted 20px to 1.25rem */
+    text-align: center;
+}
+
+.homepage-title {
+    font-size: 2rem; /* Converted 32px to 2rem */
+    font-weight: bold;
+    margin-bottom: 0.625rem; /* Converted 10px to 0.625rem */
+}
+
+.homepage-description {
+    font-size: 1rem; /* Converted 16px to 1rem */
+    color: #555;
+    line-height: 1.5;
 }

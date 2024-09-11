@@ -1,11 +1,13 @@
-.cv-container {
+.cv-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-}
-
-.pdf-viewer {
-    width: 100%;
-    height: 90vh; /* Adjust the height as needed */
-}
+  }
+  
+  .pdf-viewer {
+    width: 80%; /* Make the resume view smaller */
+    height: 80vh; /* Reduce the height to minimize scrolling */
+    max-width: 1000px;
+    margin: 0 auto;
+  }
