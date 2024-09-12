@@ -1,12 +1,15 @@
 .footer {
     width: 100%;
     background-color: #f8f8f8;
-    padding: 1.25rem; /* Converted 20px to 1.25rem */
+    padding: 1.25rem 0 rem 0; /* Added padding-bottom of 2rem */
     display: flex;
     justify-content: space-around;
     align-items: center;
     text-align: center;
     box-sizing: border-box;
+    position: absolute; /* Ensure footer stays at the bottom */
+    bottom: 0;
+    left: 0;
 }
 
 .footer-content {
@@ -29,7 +32,8 @@
 .footer-info p {
     margin: 0.3125rem 0; /* Converted 5px to 0.3125rem */
     color: #333;
-    font-size: 0.875rem; /* Converted 14px to 0.875rem */
+    font-size: 1rem; /* Increased font size to 1rem (16px) */
+    font-weight: bold; /* Added bold text */
 }
 
 .footer-logo {

@@ -37,55 +37,61 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Endpoint to handle file uploads at the /jessy route
-app.post('/jessy', upload.single('file'), (req, res) => {
-    const { page } = req.body; // Get the page to display the photo on
-    if (!page) {
-        return res.status(400).send({ error: 'No page specified' });
+app.post('/jessy', upload.fields([
+    { name: 'thumbnail', maxCount: 1 },
+    { name: 'stills', maxCount: 10 }
+]), (req, res) => {
+    const { title, vimeoLink } = req.body;
+    const thumbnail = req.files['thumbnail'] ? req.files['thumbnail'][0].filename : null;
+    const stills = req.files['stills'] ? req.files['stills'].map(file => file.filename) : [];
+
+    if (!title || !vimeoLink || !thumbnail) {
+        return res.status(400).send({ error: 'Title, Vimeo Link, and Thumbnail are required.' });
     }
-    const photoPath = req.file.filename;
-    const photoData = { path: photoPath, page };
-    fs.appendFileSync('photos.json', JSON.stringify(photoData) + '\n');
-    res.send({ message: 'File uploaded successfully', photo: photoData });
+
+    const newWork = {
+        id: Date.now(),
+        title,
+        vimeoLink,
+        thumbnail,
+        stills
+    };
+
+    // Save to JSON file
+    let previousWorks = [];
+    if (fs.existsSync('previousWorks.json')) {
+        previousWorks = JSON.parse(fs.readFileSync('previousWorks.json', 'utf8'));
+    }
+    previousWorks.push(newWork);
+    fs.writeFileSync('previousWorks.json', JSON.stringify(previousWorks, null, 2));
+
+    res.send({ message: 'Upload successful!', work: newWork });
 });
 
-// Endpoint to delete photos based on the filename
-app.delete('/jessy', (req, res) => {
-    const { filename } = req.body; // Get the filename of the photo to delete
-    if (!filename) {
-        return res.status(400).send({ error: 'No filename specified' });
+// Endpoint to retrieve previous works
+app.get('/photos/previous-work', (req, res) => {
+    if (fs.existsSync('previousWorks.json')) {
+        const previousWorks = JSON.parse(fs.readFileSync('previousWorks.json', 'utf8'));
+        return res.json(previousWorks);
+    } else {
+        return res.json([]);
     }
-
-    const filePath = path.join(__dirname, '../uploads', filename);
-
-    // Check if the file exists
-    if (!fs.existsSync(filePath)) {
-        return res.status(404).send({ error: 'File not found' });
-    }
-
-    // Delete the file
-    fs.unlinkSync(filePath);
-
-    // Update the photos.json file
-    const photos = fs.readFileSync('photos.json', 'utf8')
-        .split('\n')
-        .filter(Boolean)
-        .map(line => JSON.parse(line))
-        .filter(photo => photo.path !== filename);
-
-    fs.writeFileSync('photos.json', photos.map(photo => JSON.stringify(photo)).join('\n'));
-
-    res.send({ message: 'File deleted successfully' });
 });
 
-// Endpoint to retrieve photos based on the page
-app.get('/photos/:page', (req, res) => {
-    const page = req.params.page;
-    const photos = fs.readFileSync('photos.json', 'utf8')
-        .split('\n')
-        .filter(Boolean)
-        .map(line => JSON.parse(line))
-        .filter(photo => photo.page === page);
-    res.json(photos.map(photo => photo.path));
+// Endpoint to handle deletions
+app.delete('/jessy/:id', (req, res) => {
+    const { id } = req.params;
+
+    if (fs.existsSync('previousWorks.json')) {
+        let previousWorks = JSON.parse(fs.readFileSync('previousWorks.json', 'utf8'));
+        previousWorks = previousWorks.filter(work => work.id != id);
+
+        fs.writeFileSync('previousWorks.json', JSON.stringify(previousWorks, null, 2));
+
+        return res.send({ message: 'Deletion successful!' });
+    } else {
+        return res.status(404).send({ error: 'Work not found.' });
+    }
 });
 
 // Configure Nodemailer
