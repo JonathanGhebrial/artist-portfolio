@@ -1,19 +1,21 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Ensure full viewport height */
-  justify-content: space-between;
+  height: 90vh; /* Keep the height at 90vh */
+  justify-content: center; /* Center content vertically */
+  box-sizing: border-box;
+  padding-bottom: 2rem; /* Ensure space for the footer */
 }
 
 .about-container {
   display: flex;
   flex: 1;
   justify-content: space-between;
-  align-items: center; /* Center content vertically */
-  padding: 10px; /* Reduced padding */
+  align-items: center;
+  padding: 0 10px; /* Padding to ensure spacing on all sides */
   font-family: 'Archivo', sans-serif;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto; /* Remove negative margin for consistent centering */
   box-sizing: border-box;
 }
 
@@ -52,35 +54,15 @@
   width: 100%;
 }
 
-.contact-form-container .form-group {
-  width: 100%;
-}
-
-.contact-form-container .name-group {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px; /* Adjust the gap between the first name and last name fields */
-}
-
-.contact-form-container .name-group div {
-  width: 50%; /* Ensure both fields take up equal space */
-}
-
 .contact-form-container input,
 .contact-form-container textarea {
-  width: 100%; /* Make sure input fields take full width of their container */
-  max-width: 750px; /* Set maximum width to align with the paragraph text */
-  padding: 8px; /* Padding inside input boxes */
+  padding: 8px; /* Reduced padding */
   font-size: 14px;
-  box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
 .contact-form-container .submit-button {
-  padding: 8px 16px;
+  padding: 8px 16px; /* Reduced padding */
   font-size: 14px;
-  margin-top: 10px;
-  width: auto;
-  max-width: 750px;
 }
 
 @media (max-width: 768px) {

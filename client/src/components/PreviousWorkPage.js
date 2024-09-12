@@ -1,34 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/PreviousWorkPage.css';
 
 const PreviousWorkPage = () => {
-    const [photos, setPhotos] = useState([]);
+    const [previousWorks, setPreviousWorks] = useState([]);
 
     useEffect(() => {
-        const fetchPhotos = async () => {
-            try {
-                const response = await axios.get('/photos/previous-work');
-                setPhotos(response.data);
-            } catch (error) {
-                console.error('Error fetching photos:', error);
-            }
-        };
-
-        fetchPhotos();
+        // Fetch works from the server
+        fetch('/photos/previous-work')
+            .then(res => res.json())
+            .then(data => setPreviousWorks(data))
+            .catch(err => console.error('Error fetching works:', err));
     }, []);
 
     return (
-        <div>
-            <h2>Previous Work Photos</h2>
-            {photos.length > 0 ? (
-                <div className="photo-gallery">
-                    {photos.map((photo, index) => (
-                        <img key={index} src={`/uploads/${photo}`} alt="Uploaded" />
-                    ))}
-                </div>
-            ) : (
-                <p>No photos uploaded yet.</p>
-            )}
+        <div className="previous-work-page">
+            {previousWorks.map(work => (
+                <Link key={work.id} to={`/work/${work.id}`} className="previous-work-item">
+                    <img src={`/uploads/${work.path}`} alt={work.title} className="work-still" />
+                    <div className="work-title">{work.title}</div>
+                </Link>
+            ))}
         </div>
     );
 };

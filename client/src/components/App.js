@@ -1,25 +1,38 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import About from './About';
 import HomePage from './HomePage';
 import UploadPage from './UploadPage';
 import PreviousWorkPage from './PreviousWorkPage';
-import CVPage from './CVPage'; // Import the CVPage component
+import CVPage from './CVPage';
+import Footer from './Footer';
 
 function App() {
+    const location = useLocation();
+
+    // Determine if the footer should be displayed
+    const showFooter = location.pathname === '/' || location.pathname === '/about';
+
     return (
-        <Router>
+        <>
             <Navbar />
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/jessy" element={<UploadPage />} />
                 <Route path="/previous-work" element={<PreviousWorkPage />} />
-                <Route path="/cv" element={<CVPage />} /> {/* Add the CV page route */}
+                <Route path="/cv" element={<CVPage />} />
             </Routes>
-        </Router>
+            {showFooter && <Footer />}
+        </>
     );
 }
 
-export default App;
+export default function AppWithRouter() {
+    return (
+        <Router>
+            <App />
+        </Router>
+    );
+}

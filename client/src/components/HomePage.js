@@ -23,7 +23,6 @@ const HomePage = () => {
           Explore the work of a passionate cinematographer who captures compelling imagery and brings every vision to life with professionalism and creativity.
         </p>
       </div>
-      <Footer />
     </div>
   );
 };

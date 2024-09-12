@@ -1,105 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import '../styles/UploadPage.css';
 
 const UploadPage = () => {
-    const [file, setFile] = useState(null);
-    const [message, setMessage] = useState('');
-    const [page, setPage] = useState('home'); // Default to home page
-    const [photos, setPhotos] = useState([]);
+    const [title, setTitle] = useState('');
+    const [thumbnail, setThumbnail] = useState(null);
+    const [vimeoLink, setVimeoLink] = useState('');
+    const [additionalStills, setAdditionalStills] = useState(null);
+    const [successMessage, setSuccessMessage] = useState('');
 
-    useEffect(() => {
-        const fetchPhotos = async () => {
-            try {
-                const response = await axios.get(`/photos/${page}`);
-                setPhotos(response.data);
-            } catch (error) {
-                console.error('Error fetching photos:', error);
-            }
-        };
-
-        fetchPhotos();
-    }, [page]);
-
-    const handleFileChange = (e) => {
-        setFile(e.target.files[0]);
-    };
-
-    const handlePageChange = (e) => {
-        setPage(e.target.value);
-    };
-
-    const handleUpload = async () => {
-        if (!file) {
-            setMessage('Please select a file first');
-            return;
-        }
+    const handleUpload = (e) => {
+        e.preventDefault();
 
         const formData = new FormData();
-        formData.append('file', file);
-        formData.append('page', page);
+        formData.append('title', title);
+        formData.append('file', thumbnail); // Assuming one file for thumbnail
+        formData.append('vimeoLink', vimeoLink);
+        formData.append('page', 'previous-work'); // Specify which page it belongs to
 
-        try {
-            const response = await axios.post('/jessy', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+        // Upload files to the server
+        fetch('/jessy', {
+            method: 'POST',
+            body: formData,
+        })
+            .then(res => res.json())
+            .then(data => {
+                setSuccessMessage('Upload successful!');
+                setTitle('');
+                setThumbnail(null);
+                setVimeoLink('');
+                setAdditionalStills(null);
+                // Optionally, refresh the previous works
+            })
+            .catch(err => {
+                console.error('Upload error:', err);
+                setSuccessMessage('Upload failed. Please try again.');
             });
-            setMessage(response.data.message || 'File uploaded successfully');
-            setFile(null);
-            fetchPhotos(); // Refresh photos list after upload
-        } catch (error) {
-            console.error('Error uploading file:', error);
-            setMessage('Error uploading file');
-        }
-    };
-
-    const handleDelete = async (filename) => {
-        try {
-            const response = await axios.delete('/jessy', {
-                data: { filename, page },
-            });
-            setMessage(response.data.message || 'File deleted successfully');
-            fetchPhotos(); // Refresh photos list after delete
-        } catch (error) {
-            console.error('Error deleting file:', error);
-            setMessage('Error deleting file');
-        }
-    };
-
-    const fetchPhotos = async () => {
-        try {
-            const response = await axios.get(`/photos/${page}`);
-            setPhotos(response.data);
-        } catch (error) {
-            console.error('Error fetching photos:', error);
-        }
     };
 
     return (
-        <div>
-            <h2>Upload a Photo</h2>
-            <input type="file" onChange={handleFileChange} />
-            <select value={page} onChange={handlePageChange}>
-                <option value="home">Homepage</option>
-                <option value="previous-work">Previous Work</option>
-            </select>
-            <button onClick={handleUpload}>Upload</button>
-            {message && <p>{message}</p>}
-
-            <h2>Delete a Photo</h2>
-            <div className="photo-gallery">
-                {photos.length > 0 ? (
-                    photos.map((photo, index) => (
-                        <div key={index} style={{ marginBottom: '10px' }}>
-                            <img src={`/uploads/${photo}`} alt="Uploaded" style={{ width: '150px', marginRight: '10px' }} />
-                            <button onClick={() => handleDelete(photo)}>Delete</button>
-                        </div>
-                    ))
-                ) : (
-                    <p>No photos uploaded yet.</p>
-                )}
-            </div>
+        <div className="upload-page">
+            <h1>Upload New Work</h1>
+            <form onSubmit={handleUpload}>
+                <input
+                    type="text"
+                    placeholder="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
+                <input
+                    type="file"
+                    onChange={(e) => setThumbnail(e.target.files[0])}
+                    required
+                />
+                <input
+                    type="text"
+                    placeholder="Vimeo Link"
+                    value={vimeoLink}
+                    onChange={(e) => setVimeoLink(e.target.value)}
+                    required
+                />
+                <input
+                    type="file"
+                    onChange={(e) => setAdditionalStills(e.target.files)}
+                    multiple
+                />
+                <button type="submit">Upload</button>
+            </form>
+            {successMessage && <p className="success-message">{successMessage}</p>}
         </div>
     );
 };
