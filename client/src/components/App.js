@@ -6,6 +6,7 @@ import HomePage from './HomePage';
 import UploadPage from './UploadPage';
 import PreviousWorkPage from './PreviousWorkPage';
 import CVPage from './CVPage';
+import VideoDetailPage from './VideoDetailPage';  // Import the VideoDetailPage
 import Footer from './Footer';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/jessy" element={<UploadPage />} />
                 <Route path="/previous-work" element={<PreviousWorkPage />} />
                 <Route path="/cv" element={<CVPage />} />
+                <Route path="/:slug" element={<VideoDetailPage />} />  {/* Dynamic Route */}
             </Routes>
             {showFooter && <Footer />}
         </>

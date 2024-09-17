@@ -5,7 +5,7 @@ const UploadPage = () => {
     const [title, setTitle] = useState('');
     const [thumbnail, setThumbnail] = useState(null);
     const [vimeoLink, setVimeoLink] = useState('');
-    const [additionalStills, setAdditionalStills] = useState(null);
+    const [additionalStills, setAdditionalStills] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
 
     const handleUpload = (e) => {
@@ -13,23 +13,28 @@ const UploadPage = () => {
 
         const formData = new FormData();
         formData.append('title', title);
-        formData.append('file', thumbnail); // Assuming one file for thumbnail
+        formData.append('thumbnail', thumbnail);
         formData.append('vimeoLink', vimeoLink);
-        formData.append('page', 'previous-work'); // Specify which page it belongs to
+        for (let i = 0; i < additionalStills.length; i++) {
+            formData.append('stills', additionalStills[i]);
+        }
 
-        // Upload files to the server
         fetch('/jessy', {
             method: 'POST',
             body: formData,
         })
             .then(res => res.json())
             .then(data => {
-                setSuccessMessage('Upload successful!');
-                setTitle('');
-                setThumbnail(null);
-                setVimeoLink('');
-                setAdditionalStills(null);
-                // Optionally, refresh the previous works
+                if (data.message === 'Upload successful!') {
+                    setSuccessMessage('Upload successful!');
+                    // Clear the form
+                    setTitle('');
+                    setThumbnail(null);
+                    setVimeoLink('');
+                    setAdditionalStills([]);
+                } else {
+                    setSuccessMessage('Upload failed. Please try again.');
+                }
             })
             .catch(err => {
                 console.error('Upload error:', err);
@@ -45,31 +50,30 @@ const UploadPage = () => {
                     type="text"
                     placeholder="Title"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-                <input
-                    type="file"
-                    onChange={(e) => setThumbnail(e.target.files[0])}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Vimeo Link"
-                    value={vimeoLink}
-                    onChange={(e) => setVimeoLink(e.target.value)}
-                    required
-                />
-                <input
-                    type="file"
-                    onChange={(e) => setAdditionalStills(e.target.files)}
-                    multiple
-                />
-                <button type="submit">Upload</button>
-            </form>
-            {successMessage && <p className="success-message">{successMessage}</p>}
-        </div>
-    );
-};
-
-export default UploadPage;
+                    onChange={(e) => setTitle(e.target.value)}                    required
+                    />
+                    <input
+                        type="file"
+                        onChange={(e) => setThumbnail(e.target.files[0])}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Vimeo Link"
+                        value={vimeoLink}
+                        onChange={(e) => setVimeoLink(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="file"
+                        onChange={(e) => setAdditionalStills(e.target.files)}
+                        multiple
+                    />
+                    <button type="submit">Upload</button>
+                </form>
+                {successMessage && <p className="success-message">{successMessage}</p>}
+            </div>
+        );
+    };
+    
+    export default UploadPage;
