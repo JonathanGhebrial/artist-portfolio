@@ -1,4 +1,11 @@
-/* VideoDetailPage.css */
+/* Ensures the title is centered above the video */
+.video-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Video container setup */
 .video-container {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 aspect ratio */
@@ -17,20 +24,22 @@
     height: 100%;
 }
 
-.stills-grid {
+/* Still images grid setup */
+.stills-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for stills */
+    gap: 20px; /* Space between stills */
+    padding: 20px; /* Add some padding to the container */
 }
 
-.stills-grid img {
+.still-image {
     width: 100%;
     height: auto;
 }
 
-/* Responsive layout */
+/* Responsive layout for smaller screens */
 @media (max-width: 768px) {
-    .stills-grid {
-        grid-template-columns: 1fr;
+    .stills-container {
+        grid-template-columns: 1fr; /* Switch to a single column on small screens */
     }
 }
