@@ -1,7 +1,7 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  height: 90vh; /* Keep the height at 90vh */
+  height: 78vh; /* Keep the height at 90vh */
   justify-content: center; /* Center content vertically */
   box-sizing: border-box;
   padding-bottom: 2rem; /* Ensure space for the footer */

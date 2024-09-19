@@ -4,7 +4,7 @@
     "main": "server.js",
     "scripts": {
         "start": "concurrently \"npm run server\" \"npm run client\"",
-        "server": "nodemon --ignore uploads/* server/server.js",
+       "server": "nodemon --config server/nodemon.json server/server.js",
         "client": "npm start --prefix client",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "build": "npm run build --prefix client"
