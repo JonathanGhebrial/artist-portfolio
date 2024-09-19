@@ -172,32 +172,42 @@ app.get('/photos/previous-work', (req, res) => {
 });
 
 // Nodemailer setup (for contact form)
+// Nodemailer setup (for contact form)
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
+  service: 'gmail',
+  auth: {
+      user: process.env.EMAIL_USER, // Jessy's email from environment variable
+      pass: process.env.EMAIL_PASS,
+  },
 });
 
 // Endpoint to handle contact form submissions
 app.post('/send-email', (req, res) => {
-    const { firstName, lastName, email, subject, message } = req.body;
+  const { firstName, lastName, email, subject, message } = req.body;
 
-    const mailOptions = {
-        from: email,
-        to: process.env.EMAIL_USER,
-        subject: `Contact Form Submission: ${subject}`,
-        text: `New message from ${firstName} ${lastName} (${email}):\n\n${message}`,
-    };
+  console.log("Email request received:");
+  console.log("From:", email);
+  console.log("To:", process.env.EMAIL_USER);
+  console.log("Subject:", subject);
+  console.log("Message:", message);
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email:', error);
-            return res.status(500).send({ error: 'Failed to send email' });
-        }
-        res.send({ message: 'Email sent successfully', info });
-    });
+  const mailOptions = {
+      from: email,
+      to: process.env.EMAIL_USER, // Jessy's email
+      subject: `Contact Form Submission: ${subject}`,
+      text: `You have received a new message from ${firstName} ${lastName} (${email}):\n\n${message}`,
+  };
+
+  // Sending the email
+  transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+          console.error('Error sending email:', error);  // Log the error
+          return res.status(500).send({ message: 'Failed to send email. Please try again later.' });
+      }
+
+      console.log("Email sent successfully:", info.response);
+      res.send({ message: 'Email sent successfully' });
+  });
 });
 
 // Handles any requests that don't match the API routes

@@ -2,77 +2,55 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 720px; /* Slightly reduced max width */
+    justify-content: center;
+    padding: 2rem;
+    max-width: 750px; /* Adjusted to fit your form size */
     margin: 0 auto;
-    padding: 10px; /* Further reduced padding */
-    box-sizing: border-box;
 }
 
-.form-group {
+.contact-form form {
     width: 100%;
-    margin-bottom: 8px; /* Further reduced margin */
-}
-
-.name-group {
     display: flex;
-    flex-direction: column; /* Default to column for mobile view */
-    justify-content: space-between;
+    flex-direction: column;
 }
 
-.name-group div {
-    width: 100%; /* Full width for mobile view */
-    margin-bottom: 8px; /* Further reduced margin */
-}
-
-label {
-    display: block;
-    margin-bottom: 4px; /* Further reduced margin */
-    font-size: 11px; /* Slightly smaller font size */
-    color: #333;
-}
-
-input, textarea {
+.contact-form input,
+.contact-form textarea {
     width: 100%;
-    padding: 6px; /* Further reduced padding */
+    padding: 12px;
+    margin-bottom: 1rem;
+    font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 13px; /* Slightly smaller font size */
-    box-sizing: border-box;
 }
 
-textarea {
-    resize: vertical;
-}
-
-.submit-button {
-    background-color: #A0522D;
+.contact-form button {
+    padding: 12px;
+    background-color: #924c1b;
     color: white;
     border: none;
-    padding: 7px 14px; /* Further reduced padding */
     border-radius: 5px;
-    font-size: 13px; /* Slightly smaller font size */
     cursor: pointer;
-    align-self: center;
-    margin-top: 8px; /* Reduced margin-top */
+    font-size: 16px;
 }
 
-.submit-button:hover {
-    background-color: #8B4513;
+.contact-form button:hover {
+    background-color: #d35e10;
 }
 
-/* Media query for tablets and desktop */
-@media (min-width: 768px) {
-    .name-group {
-        flex-direction: row; /* Switch to row layout for larger screens */
-    }
+.success-message {
+    color: green;
+    margin-top: 1rem;
+}
 
-    .name-group div {
-        width: 48%;
-        margin-bottom: 0;
-    }
+.error-message {
+    color: red;
+    margin-top: 1rem;
+}
 
-    .submit-button {
-        width: auto;
-        align-self: center;
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 1rem;
+        max-width: 100%;
     }
 }
