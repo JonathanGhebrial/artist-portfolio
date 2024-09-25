@@ -9,13 +9,38 @@ const UploadPage = () => {
     const [vimeoLink, setVimeoLink] = useState('');
     const [additionalStills, setAdditionalStills] = useState([]);
     const [successMessage, setSuccessMessage] = useState('');
+    const [password, setPassword] = useState('');
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
-        fetch('/photos/previous-work')
-            .then((res) => res.json())
-            .then((data) => setVideos(data))
-            .catch((err) => console.error('Error fetching videos:', err));
-    }, []);
+        if (isAuthenticated) {
+            fetch('/photos/previous-work')
+                .then((res) => res.json())
+                .then((data) => setVideos(data))
+                .catch((err) => console.error('Error fetching videos:', err));
+        }
+    }, [isAuthenticated]);
+
+    const handlePasswordSubmit = (e) => {
+        e.preventDefault();
+        fetch('/jessy/password-check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ password }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.accessGranted) {
+                setIsAuthenticated(true);
+            } else {
+                setErrorMessage('Incorrect password. Please try again.');
+            }
+        })
+        .catch((err) => console.error('Error verifying password:', err));
+    };
 
     const resetForm = () => {
         setTitle('');
@@ -23,12 +48,6 @@ const UploadPage = () => {
         setVimeoLink('');
         setAdditionalStills([]);
         setSelectedVideo(null);
-    };
-
-    const handleEdit = (video) => {
-        setSelectedVideo(video);
-        setTitle(video.title);
-        setVimeoLink(video.vimeoLink);
     };
 
     const handleUpload = (e) => {
@@ -49,66 +68,92 @@ const UploadPage = () => {
             method: method,
             body: formData,
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.message === 'Upload successful!' || data.message === 'Video updated successfully!') {
-                    setSuccessMessage(selectedVideo ? 'Update successful!' : 'New work added successfully!');
-                    setVideos((prevVideos) =>
-                        selectedVideo
-                            ? prevVideos.map((vid) =>
-                                vid.id === selectedVideo.id ? data.video : vid
-                              )
-                            : [...prevVideos, data.video]
-                    );
-                    resetForm(); // Reset form fields
-                } else {
-                    setSuccessMessage('Update failed. Please try again.');
-                }
-            })
-            .catch(err => {
-                console.error('Upload error:', err);
+        .then(res => res.json())
+        .then(data => {
+            if (data.message === 'Upload successful!' || data.message === 'Video updated successfully!') {
+                setSuccessMessage(selectedVideo ? 'Update successful!' : 'New work added successfully!');
+                setVideos((prevVideos) =>
+                    selectedVideo
+                        ? prevVideos.map((vid) =>
+                            vid.id === selectedVideo.id ? data.video : vid
+                          )
+                        : [...prevVideos, data.video]
+                );
+                resetForm(); // Reset form fields
+            } else {
                 setSuccessMessage('Update failed. Please try again.');
-            });
+            }
+        })
+        .catch(err => {
+            console.error('Upload error:', err);
+            setSuccessMessage('Update failed. Please try again.');
+        });
     };
 
-    const handleDeleteStill = (videoId, still) => {
-        fetch(`/jessy/${videoId}/stills/${still}`, {
-            method: 'DELETE',
-        })
-            .then((res) => res.json())
-            .then(() => {
-                setVideos((prevVideos) =>
-                    prevVideos.map((vid) =>
-                        vid.id === videoId ? { ...vid, stills: vid.stills.filter((s) => s !== still) } : vid
-                    )
-                );
-                setSelectedVideo(prev => ({
-                    ...prev,
-                    stills: prev.stills.filter((s) => s !== still)
-                }));
-                setSuccessMessage('Still deleted successfully!');
-            })
-            .catch((err) => {
-                console.error('Error deleting still:', err);
-                setSuccessMessage('Failed to delete still. Please try again.');
-            });
+    const handleEdit = (video) => {
+        setSelectedVideo(video);
+        setTitle(video.title);
+        setVimeoLink(video.vimeoLink);
     };
 
     const handleDeleteVideo = (videoId) => {
         fetch(`/jessy/${videoId}`, {
             method: 'DELETE',
         })
-            .then((res) => res.json())
-            .then(() => {
-                setVideos((prevVideos) => prevVideos.filter((vid) => vid.id !== videoId));
-                resetForm();
-                setSuccessMessage('Video deleted successfully!');
-            })
-            .catch((err) => {
-                console.error('Error deleting video:', err);
-                setSuccessMessage('Failed to delete video. Please try again.');
-            });
+        .then((res) => res.json())
+        .then(() => {
+            setVideos((prevVideos) => prevVideos.filter((vid) => vid.id !== videoId));
+            resetForm();
+            setSuccessMessage('Video deleted successfully!');
+        })
+        .catch((err) => {
+            console.error('Error deleting video:', err);
+            setSuccessMessage('Failed to delete video. Please try again.');
+        });
     };
+
+    const handleDeleteStill = (videoId, still) => {
+        fetch(`/jessy/${videoId}/stills/${still}`, {
+            method: 'DELETE',
+        })
+        .then((res) => res.json())
+        .then(() => {
+            setVideos((prevVideos) =>
+                prevVideos.map((vid) =>
+                    vid.id === videoId ? { ...vid, stills: vid.stills.filter((s) => s !== still) } : vid
+                )
+            );
+            setSelectedVideo(prev => ({
+                ...prev,
+                stills: prev.stills.filter((s) => s !== still)
+            }));
+            setSuccessMessage('Still deleted successfully!');
+        })
+        .catch((err) => {
+            console.error('Error deleting still:', err);
+            setSuccessMessage('Failed to delete still. Please try again.');
+        });
+    };
+
+    if (!isAuthenticated) {
+        return (
+            <div className="password-protection">
+                <h2>Please enter the password to manage previous work</h2>
+                <form onSubmit={handlePasswordSubmit}>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+            </div>
+        );
+    }
 
     return (
         <div className="upload-page">
@@ -119,34 +164,45 @@ const UploadPage = () => {
                         <h2>{video.title}</h2>
                         <img src={`/uploads/${video.thumbnail}`} alt="Thumbnail" width="100" />
                         <button onClick={() => handleEdit(video)}>Edit</button>
-                        <button onClick={() => handleDeleteVideo(video.id)}>Delete Video</button>
+                        <button onClick={() => handleDeleteVideo(video.id)}>Delete Group</button>
                     </div>
                 ))}
             </div>
 
             <h2>{selectedVideo ? 'Edit Work' : 'Add New Work'}</h2>
             <form onSubmit={handleUpload}>
+                <label htmlFor="title">Title:</label>
                 <input
                     type="text"
+                    id="title"
                     placeholder="Title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     required
                 />
+                
+                <label htmlFor="thumbnail">Upload Thumbnail:</label>
                 <input
                     type="file"
+                    id="thumbnail"
                     onChange={(e) => setThumbnail(e.target.files[0])}
                     required={!selectedVideo} // Thumbnail required only for new uploads
                 />
+                
+                <label htmlFor="vimeoLink">Vimeo Link:</label>
                 <input
                     type="text"
+                    id="vimeoLink"
                     placeholder="Vimeo Link"
                     value={vimeoLink}
                     onChange={(e) => setVimeoLink(e.target.value)}
                     required
                 />
+                
+                <label htmlFor="stills">Upload Stills:</label>
                 <input
                     type="file"
+                    id="stills"
                     onChange={(e) => setAdditionalStills(e.target.files)}
                     multiple
                 />
