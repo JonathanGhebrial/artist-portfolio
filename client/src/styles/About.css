@@ -1,10 +1,10 @@
 .about-page {
   display: flex;
   flex-direction: column;
-  height: 78vh; /* Keep the height at 90vh */
-  justify-content: center; /* Center content vertically */
+  height: 78vh; 
+  justify-content: center; 
   box-sizing: border-box;
-  padding-bottom: 2rem; /* Ensure space for the footer */
+  padding-bottom: 2rem; 
 }
 
 .about-container {
@@ -12,15 +12,15 @@
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px; /* Padding to ensure spacing on all sides */
+  padding: 0 10px; 
   font-family: 'Archivo', sans-serif;
   max-width: 1200px;
-  margin: 0 auto; /* Remove negative margin for consistent centering */
+  margin: 0 auto; 
   box-sizing: border-box;
 }
 
 .portrait {
-  max-width: 35%; /* Adjusted to make the image slightly smaller */
+  max-width: 35%; 
   height: auto;
   border-radius: 10px;
 }
@@ -34,34 +34,34 @@
 }
 
 .about-content h1 {
-  font-size: 22px; /* Slightly reduced font size */
+  font-size: 22px; 
   color: #333;
-  margin-bottom: 12px; /* Reduced margin */
-  align-self: center; /* Center the title */
+  margin-bottom: 12px; 
+  align-self: center; 
 }
 
 .about-content p {
-  font-size: 14px; /* Slightly reduced font size */
+  font-size: 14px; 
   color: #555;
-  margin-bottom: 12px; /* Reduced margin */
+  margin-bottom: 12px; 
   line-height: 1.4;
-  max-width: 750px; /* Match the max width of the contact form */
-  text-align: center; /* Center text for better aesthetics */
+  max-width: 750px; 
+  text-align: center; 
 }
 
 .contact-form-container {
-  margin-top: 12px; /* Reduced margin */
+  margin-top: 12px; 
   width: 100%;
 }
 
 .contact-form-container input,
 .contact-form-container textarea {
-  padding: 8px; /* Reduced padding */
+  padding: 8px; 
   font-size: 14px;
 }
 
 .contact-form-container .submit-button {
-  padding: 8px 16px; /* Reduced padding */
+  padding: 8px 16px; 
   font-size: 14px;
 }
 

@@ -6,8 +6,8 @@
   }
   
   .pdf-viewer {
-    width: 80%; /* Make the resume view smaller */
-    height: 80vh; /* Reduce the height to minimize scrolling */
+    width: 80%; 
+    height: 80vh; 
     max-width: 1000px;
     margin: 0 auto;
   }

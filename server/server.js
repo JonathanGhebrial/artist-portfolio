@@ -4,7 +4,7 @@ const multer = require('multer');
 const fs = require('fs');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config(); 
 
 const app = express();
 
@@ -49,7 +49,7 @@ const upload = multer({
   },
 });
 
-// Serve the static files from the React app
+
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Serve the uploaded files statically
@@ -200,7 +200,7 @@ app.get('/photos/previous-work', (req, res) => {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER, // Jessy's email from environment variable
+    user: process.env.EMAIL_USER, 
     pass: process.env.EMAIL_PASS,
   },
 });
@@ -217,7 +217,7 @@ app.post('/send-email', (req, res) => {
 
   const mailOptions = {
     from: email,
-    to: process.env.EMAIL_USER, // Jessy's email
+    to: process.env.EMAIL_USER, 
     subject: `Contact Form Submission: ${subject}`,
     text: `You have received a new message from ${firstName} ${lastName} (${email}):\n\n${message}`,
   };
@@ -236,7 +236,7 @@ app.post('/send-email', (req, res) => {
   });
 });
 
-// Handles any requests that don't match the API routes
+
 app.get('*', (req, res) => {
   const filePath = path.join(__dirname, '../client/dist/index.html');
   res.sendFile(filePath, (err) => {

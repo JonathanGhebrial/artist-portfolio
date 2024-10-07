@@ -1,7 +1,7 @@
 .previous-work-page {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns */
-    gap: 20px; /* Space between the items */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
     padding: 20px;
   }
   
@@ -29,7 +29,7 @@
     font-size: 24px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    pointer-events: none; /* Prevent title from being clickable */
+    pointer-events: none; 
   }
   
   .work-image-container:hover .work-title {

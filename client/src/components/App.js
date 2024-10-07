@@ -6,7 +6,7 @@ import HomePage from './HomePage';
 import UploadPage from './UploadPage';
 import PreviousWorkPage from './PreviousWorkPage';
 import CVPage from './CVPage';
-import VideoDetailPage from './VideoDetailPage';  // Import the VideoDetailPage
+import VideoDetailPage from './VideoDetailPage';  
 import Footer from './Footer';
 
 function App() {

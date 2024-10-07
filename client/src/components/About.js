@@ -1,8 +1,8 @@
 import React from 'react';
-import '../styles/About.css'; // Ensure this CSS file is created
-import ContactForm from './ContactForm'; // Assuming you have a ContactForm component
-import JessyPortrait from '../assets/jessyportrait.png'; // Assuming this is the correct path to your image
-import Footer from './Footer'; // Import the Footer component
+import '../styles/About.css'; 
+import ContactForm from './ContactForm'; 
+import JessyPortrait from '../assets/jessyportrait.png'; 
+import Footer from './Footer'; 
 
 const About = () => {
     return (

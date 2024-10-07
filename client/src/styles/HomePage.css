@@ -20,7 +20,7 @@
 .video-container {
     position: relative;
     width: 100%;
-    max-width: 90vw; /* Make it take almost the full screen width */
+    max-width: 90vw; 
     height: 0;
     padding-bottom: 56.25%; /* 16:9 Aspect ratio */
     margin-bottom: 20px;
@@ -69,6 +69,6 @@
     }
 
     .video-container {
-        max-width: 100%; /* Make it take the full width on mobile */
+        max-width: 100%; 
     }
 }
